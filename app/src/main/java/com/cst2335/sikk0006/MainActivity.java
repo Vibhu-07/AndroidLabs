@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        button = findViewById(R.id.button2);
+        setContentView(R.layout.activity_main_constraint);
+        button = findViewById(R.id.button);
         switch3=findViewById(R.id.switch1);
 
         button.setOnClickListener(new View.OnClickListener() {

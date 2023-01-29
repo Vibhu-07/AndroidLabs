@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Lab1</string>
+    <string name="Lab2">Lab 2 GUI</string>
+    <string name="click_me">CLIQUEZ ICI</string>
+    <string name="check_me" >Regarde ça</string>
+    <string name="switch_me" >Allumer/éteindre</string>
+    <string name="name_me">Entrez le nom ici</string>
+
+</resources>

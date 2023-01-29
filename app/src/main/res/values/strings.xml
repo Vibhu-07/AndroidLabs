@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">Lab1</string>
-    <string name="hello_message">Hello World!</string>
-    <string name="ButtonText">I\’m a button</string>
+    <string name="app_name">Lab2</string>
+    <string name="Lab2">Lab 2 GUI</string>
+
+    <string name="click_me" > CLICK HERE</string>
+    <string name="check_me">Check this out</string>
+    <string name="switch_me" >Switch on/off</string>
+    <string name="name_me">Enter Name Here</string>
+
 </resources>

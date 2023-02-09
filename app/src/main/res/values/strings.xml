@@ -1,10 +1,15 @@
 <resources>
-    <string name="app_name">Lab2</string>
+    <string name="app_name">Lab3</string>
+    <string name="enterName">Enter your name</string>
+    <string name="enterEmail">Enter your email</string>
+    <string name="enterPassword">Enter your password</string>
+    <string name="loginButton">Login</string>
+    <string name="pictureButton">Take Picture</string>
+    <string name="mainActivity">Main Activity</string>
+    <string name="profileActivity">Profile Activity</string>
     <string name="Lab2">Lab 2 GUI</string>
-
     <string name="click_me" > CLICK HERE</string>
     <string name="check_me">Check this out</string>
     <string name="switch_me" >Switch on/off</string>
     <string name="name_me">Enter Name Here</string>
-
 </resources>

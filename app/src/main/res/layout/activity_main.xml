@@ -13,7 +13,7 @@
         android:id="@+id/textView2"
         android:layout_width="409dp"
         android:layout_height="53dp"
-        android:text="@string/Lab2"
+        android:text="Lab2"
         android:textAlignment="center"
         android:textSize="34sp" />
 <LinearLayout

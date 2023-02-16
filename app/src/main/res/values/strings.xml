@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lab3</string>
+    <string name="app_name">Android Labs Lab 4</string>
     <string name="enterName">Enter your name</string>
     <string name="enterEmail">Enter your email</string>
     <string name="enterPassword">Enter your password</string>
@@ -12,4 +12,8 @@
     <string name="check_me">Check this out</string>
     <string name="switch_me" >Switch on/off</string>
     <string name="name_me">Enter Name Here</string>
+    <string name="yourProfile">Your profile</string>
+    <string name="address">Address</string>
+    <string name="saveData">SAVE DATA</string>
+    <string name="clearData">CLEAR DATA</string>
 </resources>

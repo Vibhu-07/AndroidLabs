@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">Lab2</string>
+    <string name="app_name">Android Labs Lab 4</string>
     <string name="Lab2">Lab 2 GUI</string>
     <string name="click_me" > CLICK HERE</string>
     <string name="check_me">Check this out</string>
     <string name="switch_me" >Switch on/off</string>
     <string name="name_me">Enter Name Here</string>
-
+    <string name="yourProfile">Your profile</string>
 </resources>

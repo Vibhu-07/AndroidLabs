@@ -5,7 +5,7 @@
     <string name="check_me" >Regarde ça</string>
     <string name="switch_me" >Allumer/éteindre</string>
     <string name="name_me">Entrez le nom ici</string>
-    <string name="app_name">Laboratoire 3</string>
+    <string name="app_name">Andrioda Laboratoire 4</string>
     <string name="enterName">Entrez votre nom</string>
     <string name="enterEmail">Entrer votre Email</string>
     <string name="enterPassword">Tapez votre mot de passe</string>
@@ -13,5 +13,10 @@
     <string name="pictureButton">Prendre une photo</string>
     <string name="mainActivity">Activité principale</string>
     <string name="profileActivity">Activité du profil</string>
+    <string name="yourProfile">Votre profil</string>
+    <string name="address">Adresse</string>
+    <string name="saveData">ENREGISTRER DES DONNÉES</string>
+    <string name="clearData">EFFACER LES DONNÉES</string>
+
 
 </resources>

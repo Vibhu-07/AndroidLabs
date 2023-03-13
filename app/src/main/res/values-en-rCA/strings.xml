@@ -3,4 +3,7 @@
     <string name="app_name">Lab1</string>
     <string name="hello_message">Namaste!</string>
     <string name="ButtonText">I\’m a button</string>
+    <string name="message">Message goes here</string>
+    <string name="time">Time goes here</string>
+
 </resources>

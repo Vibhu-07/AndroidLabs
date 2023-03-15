@@ -7,16 +7,17 @@
 
     <TextView
         android:id="@+id/textViewMessage"
-        android:layout_width="210dp"
-        android:layout_height="28dp"
+        android:layout_width="174dp"
+        android:layout_height="42dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewTime"
-        android:layout_width="97dp"
-        android:layout_height="18dp"
+        android:layout_width="161dp"
+        android:layout_height="21dp"
+        android:textSize="8sp"
         app:layout_constraintStart_toEndOf="@+id/textViewMessage"
         app:layout_constraintTop_toTopOf="@+id/textViewMessage" />
 

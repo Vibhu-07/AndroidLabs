@@ -43,8 +43,8 @@ public class ChatRoom extends AppCompatActivity {
         TextView messageText, timeText;  //variables used in chat layout
         public MyRowHolder(@NonNull View itemView) { //constructor
             super(itemView);
-            messageText = findViewById(R.id.textViewMessage);
-            timeText = findViewById(R.id.textViewTime);
+            messageText = itemView.findViewById(R.id.textViewMessage);
+            timeText = itemView.findViewById(R.id.textViewTime);
         }
     }
 
@@ -76,7 +76,17 @@ public class ChatRoom extends AppCompatActivity {
             //all the onCreateViewHolder() needs to do is to load the correct View for the type viewType.
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 SentMessageBinding binding = SentMessageBinding.inflate(getLayoutInflater());
-                return new MyRowHolder(binding.getRoot());
+                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+                View view;
+                if (viewType == 0) {
+                    // Inflate the send_message layout
+                    view = inflater.inflate(R.layout.sent_message, parent, false);
+                } else {
+                    // Inflate the receive_message layout
+                    view = inflater.inflate(R.layout.recieve_message, parent, false);
+                }
+
+                return new MyRowHolder(view);
             }
 
             @Override
@@ -92,7 +102,7 @@ public class ChatRoom extends AppCompatActivity {
                     TextView timeTextView = holder.itemView.findViewById(R.id.textViewTime);
                     if (messageTextView != null) {
                         messageTextView.setText(message.getMessage());
-                        timeTextView.setText("");
+                        timeTextView.setText(message.getTimeSent());
                     }
 
                 }
@@ -109,7 +119,12 @@ public class ChatRoom extends AppCompatActivity {
             @Override
             //This function returns an int which is the parameter which gets passed in to the onCreateViewHolder(ViewGroup parent, int viewType) function
             public int getItemViewType(int position){
-                return 0;
+                ChatMessage message = messages.get(position);
+                if (message.isSentButton()) {
+                    return 0;
+                } else {
+                    return 1;
+                }
             }
         });
 
@@ -145,10 +160,15 @@ public class ChatRoom extends AppCompatActivity {
                 ChatMessage newMessage = new ChatMessage(messageText, currentDateandTime, false);
 
                 // Add the new ChatMessage object to the messages ArrayList
+                //notify item added to the recyclerView Adapter to show the changes + Dataset changed
+                myAdapter.notifyItemInserted(messages.size()-1); // (-1) as inserted at end
                 messages.add(newMessage);
 
                 // Notify the adapter that the data set has changed
                 myAdapter.notifyDataSetChanged();
+
+                //clear previous text
+                binding.textInput.setText("");
             }
         });
     }

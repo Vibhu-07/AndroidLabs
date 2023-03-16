@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cst2335.sikk0006.databinding.ActivityChatRoomBinding;
+import com.cst2335.sikk0006.databinding.RecieveMessageBinding;
 import com.cst2335.sikk0006.databinding.SentMessageBinding;
 
 import java.text.SimpleDateFormat;
@@ -75,18 +76,13 @@ public class ChatRoom extends AppCompatActivity {
             @Override
             //all the onCreateViewHolder() needs to do is to load the correct View for the type viewType.
             public MyRowHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                SentMessageBinding binding = SentMessageBinding.inflate(getLayoutInflater());
-                LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-                View view;
                 if (viewType == 0) {
-                    // Inflate the send_message layout
-                    view = inflater.inflate(R.layout.sent_message, parent, false);
+                    SentMessageBinding sendBinding = SentMessageBinding.inflate(getLayoutInflater());
+                    return new MyRowHolder(sendBinding.getRoot());
                 } else {
-                    // Inflate the receive_message layout
-                    view = inflater.inflate(R.layout.recieve_message, parent, false);
+                    RecieveMessageBinding receiveBinding = RecieveMessageBinding.inflate(getLayoutInflater());
+                    return new MyRowHolder(receiveBinding.getRoot());
                 }
-
-                return new MyRowHolder(view);
             }
 
             @Override
@@ -94,18 +90,11 @@ public class ChatRoom extends AppCompatActivity {
             public void onBindViewHolder(@NonNull MyRowHolder holder, int position) {
                 // Get the message at the given position in the dataset
                 ChatMessage message = messages.get(position);
-
-                // Check if the message and holder views are not null
-                if (message != null && holder != null) {
-                    // Set the message text on the TextView object
-                    TextView messageTextView = holder.itemView.findViewById(R.id.textViewMessage);
-                    TextView timeTextView = holder.itemView.findViewById(R.id.textViewTime);
-                    if (messageTextView != null) {
-                        messageTextView.setText(message.getMessage());
-                        timeTextView.setText(message.getTimeSent());
-                    }
-
-                }
+                // Set the message text on the TextView object
+                TextView messageTextView = holder.itemView.findViewById(R.id.textViewMessage);
+                TextView timeTextView = holder.itemView.findViewById(R.id.textViewTime);
+                messageTextView.setText(message.getMessage());
+                timeTextView.setText(message.getTimeSent());
             }
 
 

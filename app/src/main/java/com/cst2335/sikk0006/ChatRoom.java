@@ -1,6 +1,7 @@
 package com.cst2335.sikk0006;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -28,12 +29,14 @@ public class ChatRoom extends AppCompatActivity {
     //binding object from Binding class
     ActivityChatRoomBinding binding;
 
-
     //ArrayList of String objects that will store messages in each go
     ArrayList<ChatMessage> messages = new ArrayList<>();
 
     //ChatModel obj used for retrieving info at rotation
     ChatRoomViewModel chatModel ;
+
+    // ChatMessage DAO object
+    ChatMessageDAO mDAO;
 
 
     //Adapter for recycler that notifies it
@@ -44,15 +47,50 @@ public class ChatRoom extends AppCompatActivity {
         TextView messageText, timeText;  //variables used in chat layout
         public MyRowHolder(@NonNull View itemView) { //constructor
             super(itemView);
+            itemView.setOnClickListener(clk->{
+                // Get the item at the clicked position
+                int position = getBindingAdapterPosition();
+
+                // Create an alert dialog to confirm deletion
+                AlertDialog.Builder builder = new AlertDialog.Builder(ChatRoom.this);
+                builder.setMessage("Do you want to delete the message: " + messageText.getText ())
+                .setTitle("Question: ")
+                .setNegativeButton( "No", (dialog, ol) -> { })
+                .setPositiveButton( "Yes", (dialog, cl) -> {
+                    messages.remove(position);
+                    // Delete the message from the database
+
+
+                    myAdapter.notifyItemRemoved(position);
+                }).create().show();
+            });
             messageText = itemView.findViewById(R.id.textViewMessage);
             timeText = itemView.findViewById(R.id.textViewTime);
         }
+    }
+
+    // Method to load all chats into database at once
+    private void loadMessages() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                messages.addAll( mDAO.getAllMessages() );
+            }
+        }).start();
     }
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        // Creating database instance
+        MessageDatabase db = MessageDatabase.getInstance(getApplicationContext());
+        mDAO = db.chatMessageDAO();
+
+        // Load all messages into Database
+        loadMessages();
 
         // RETRIEVING LIST UPON ROTATION (SURVIVING THE ROTATION)
         chatModel = new ViewModelProvider(this).get(ChatRoomViewModel.class);
@@ -134,6 +172,14 @@ public class ChatRoom extends AppCompatActivity {
 
             //clear previous text
             binding.textInput.setText("");
+
+            // Insert the chat message into the database
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    mDAO.insertMessage(chatMessage);
+                }
+            }).start();
         });
 
         // Set the click listener for the Receive button
@@ -158,7 +204,16 @@ public class ChatRoom extends AppCompatActivity {
 
                 //clear previous text
                 binding.textInput.setText("");
+
+                // Insert the chat message into the database
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mDAO.insertMessage(newMessage);
+                    }
+                }).start();
             }
         });
+
     }
 }

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.cst2335.sikk0006.databinding.SentMessageBinding;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import data.ChatRoomViewModel;
 
@@ -59,8 +61,7 @@ public class ChatRoom extends AppCompatActivity {
                 .setPositiveButton( "Yes", (dialog, cl) -> {
                     messages.remove(position);
                     // Delete the message from the database
-
-
+//                    mDAO.deleteMessage(deletedMessage);
                     myAdapter.notifyItemRemoved(position);
                 }).create().show();
             });
@@ -74,11 +75,16 @@ public class ChatRoom extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                messages.addAll( mDAO.getAllMessages() );
+                final List<ChatMessage> loadedMessages = mDAO.getAllMessages();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        messages.addAll(loadedMessages);
+                    }
+                });
             }
         }).start();
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
